@@ -15,8 +15,6 @@ void Renderer::EndFrame() {
     // TODO: End rendering frame
 }
 
-void Renderer::Draw() {
-    // TODO: Draw scene
-}
+
 
 } // namespace TONGUE

@@ -1,18 +1,14 @@
+
 #include "Renderer/Shader.h"
+#include <string>
 
 namespace TONGUE {
 
-bool Shader::Load(const char* vertexPath, const char* fragmentPath) {
-    // TODO: Load and compile shaders
+bool Shader::Load(const std::string&, const std::string&) {
     return true;
 }
 
-void Shader::Bind() const {
-    // TODO: Bind shader
-}
-
-void Shader::Unbind() const {
-    // TODO: Unbind shader
-}
+void Shader::Bind() const {}
+void Shader::Unbind() const {}
 
 } // namespace TONGUE

@@ -1,15 +1,30 @@
 #pragma once
+#include <memory>
 
-// Main interface for the TONGUE Renderer
+#pragma once
+#include <memory>
 
 namespace TONGUE {
+    class Window;
+    class Mesh;
+    class Texture;
+    class Character;
+    struct Vector3;
 
-class Renderer {
-public:
-    bool Init(int width, int height);
-    void BeginFrame();
-    void EndFrame();
-    void Draw(); // Placeholder for drawing logic
-};
+    class Renderer {
+    public:
+        bool Init(int width, int height);
+        void Shutdown();
 
-} // namespace TONGUE
+        void BeginFrame();
+        void EndFrame();
+        void Present();
+
+        void DrawMesh(const Mesh& mesh);
+        void DrawTexture(const Texture& texture, const Vector3& pos);
+        void DrawCharacter(const Character& character);
+
+    private:
+        std::unique_ptr<Window> window;
+    };
+}

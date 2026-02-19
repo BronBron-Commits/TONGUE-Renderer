@@ -1,18 +1,18 @@
 #include "Renderer/Texture.h"
 
-namespace TONGUE {
+#include "Renderer/Texture.h"
 
-bool Texture::Load(const char* path) {
-    // TODO: Load texture from file
+#include "Renderer/Texture.h"
+
+namespace TONGUE
+{
+
+bool Texture::Load(const char*)
+{
     return true;
 }
 
-void Texture::Bind(unsigned slot) const {
-    // TODO: Bind texture to slot
-}
+void Texture::Bind(unsigned) const {}
+void Texture::Unbind() const {}
 
-void Texture::Unbind() const {
-    // TODO: Unbind texture
 }
-
-} // namespace TONGUE

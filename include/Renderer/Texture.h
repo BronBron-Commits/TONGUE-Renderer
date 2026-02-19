@@ -1,14 +1,18 @@
 #pragma once
+#include <string>
 
-// Texture abstraction for TONGUE Renderer
+#pragma once
+#include <string>
 
-namespace TONGUE {
+#pragma once
 
-class Texture {
-public:
-    bool Load(const char* path);
-    void Bind(unsigned slot = 0) const;
-    void Unbind() const;
-};
-
-} // namespace TONGUE
+namespace TONGUE
+{
+    class Texture
+    {
+    public:
+        bool Load(const char* path);
+        void Bind(unsigned slot = 0) const;
+        void Unbind() const;
+    };
+}

@@ -1,14 +1,20 @@
 #pragma once
+#include <string>
 
-// Shader management for TONGUE Renderer
+#pragma once
+#include <string>
+#include "Renderer/MathTypes.h"
 
-namespace TONGUE {
+#pragma once
+#include <string>
 
-class Shader {
-public:
-    bool Load(const char* vertexPath, const char* fragmentPath);
-    void Bind() const;
-    void Unbind() const;
-};
-
-} // namespace TONGUE
+namespace TONGUE
+{
+    class Shader
+    {
+    public:
+        bool Load(const std::string& vert, const std::string& frag);
+        void Bind() const;
+        void Unbind() const;
+    };
+}
