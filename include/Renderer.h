@@ -1,30 +1,57 @@
-#pragma once
-#include <memory>
 
 #pragma once
 #include <memory>
+#include <vector>
+
+
+#include "Renderer/Color.h"
+#include "Renderer/RenderSubmission.h"
 
 namespace TONGUE {
-    class Window;
-    class Mesh;
-    class Texture;
-    class Character;
-    struct Vector3;
 
-    class Renderer {
-    public:
-        bool Init(int width, int height);
-        void Shutdown();
+class Window;
+class Mesh;
+class Texture;
+class Shader;
+class Camera;
+class Character;
+struct Viewport;
 
-        void BeginFrame();
-        void EndFrame();
-        void Present();
+// The only legal frontend interface for rendering
 
-        void DrawMesh(const Mesh& mesh);
-        void DrawTexture(const Texture& texture, const Vector3& pos);
-        void DrawCharacter(const Character& character);
+class Renderer {
+public:
+    Renderer();
+    ~Renderer();
 
-    private:
-        std::unique_ptr<Window> window;
-    };
-}
+    // --- Lifecycle ---
+    bool Init(int width, int height, const char* title = "TONGUE Renderer");
+    void Shutdown();
+
+    // --- Frame Control (single entry point for all drawing) ---
+    void BeginFrame();
+    void SetViewport(int x, int y, int width, int height);
+    void Clear(const Color& color);
+    void Submit(const RenderSubmission& submission); // Accepts mesh, transform, material, etc.
+
+    void EndFrame();
+    void Present();
+    bool WindowShouldClose() const;
+
+    // --- Resource Management (all GPU objects owned here) ---
+    std::shared_ptr<Mesh>   CreateMesh(/* params */);
+    std::shared_ptr<Texture> CreateTexture(/* params */);
+    std::shared_ptr<Shader>  CreateShader(/* params */);
+
+    // --- Scene/Entity Translation (optional, for high-level helpers) ---
+    void Submit(const Character& character);
+
+    // --- No frontend may call graphics APIs directly ---
+    // All rendering must go through Renderer.
+
+private:
+    struct Impl;
+    std::unique_ptr<Impl> impl;
+};
+
+} // namespace TONGUE

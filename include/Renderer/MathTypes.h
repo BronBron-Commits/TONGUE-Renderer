@@ -1,13 +1,16 @@
+
 #pragma once
 
-struct Vector2 {
-    float x, y;
-};
+namespace TONGUE {
+    struct Vector2 {
+        float x, y;
+    };
 
-struct Vector3 {
-    float x, y, z;
-};
+    struct Vector3 {
+        float x, y, z;
+    };
 
-struct Matrix4 {
-    float m[16];
-};
+    struct Matrix4 {
+        float m[16];
+    };
+}
