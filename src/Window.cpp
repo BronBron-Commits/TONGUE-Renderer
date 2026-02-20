@@ -1,7 +1,6 @@
 #include "Renderer/Window.h"
 #ifdef _WIN32
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <windows.h>
 #include <string>
 #include <tchar.h>
 
@@ -16,6 +15,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 }
 
 bool Window::Create(int w, int h, const std::string& title) {
+	hwnd = nullptr;
 	width = w;
 	height = h;
 	shouldClose = false;
@@ -48,34 +48,14 @@ bool Window::Create(int w, int h, const std::string& title) {
 
 	hdc = GetDC(hwnd);
 	PIXELFORMATDESCRIPTOR pfd = {};
-	pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-	pfd.nVersion = 1;
-	pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-	pfd.iPixelType = PFD_TYPE_RGBA;
-	pfd.cColorBits = 32;
-	pfd.cDepthBits = 24;
-	pfd.cStencilBits = 8;
-	pfd.iLayerType = PFD_MAIN_PLANE;
-
-	int pf = ChoosePixelFormat(hdc, &pfd);
-	if (!pf) return false;
-	if (!SetPixelFormat(hdc, pf, &pfd)) return false;
-
-	hglrc = wglCreateContext(hdc);
-	if (!hglrc) return false;
-	if (!wglMakeCurrent(hdc, hglrc)) return false;
-
+	// DirectX 12 swap chain and device creation will go here
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
 	return true;
 }
 
 void Window::Destroy() {
-	if (hglrc) {
-		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(hglrc);
-		hglrc = nullptr;
-	}
+	// DirectX 12 context cleanup will go here
 	if (hwnd && hdc) {
 		ReleaseDC(hwnd, hdc);
 		hdc = nullptr;

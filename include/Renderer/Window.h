@@ -14,11 +14,16 @@ public:
     int GetWidth() const;
     int GetHeight() const;
 
+#ifdef _WIN32
+    void* GetHWND() const { return hwnd; }
+#endif
+
 private:
 #ifdef _WIN32
     HWND hwnd = nullptr;
     HDC hdc = nullptr;
-    HGLRC hglrc = nullptr;
+    // DirectX 12 device/context handles will go here
+    // Example: ComPtr<ID3D12Device> device;
     int width = 0;
     int height = 0;
     bool shouldClose = false;

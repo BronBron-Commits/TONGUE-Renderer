@@ -11,4 +11,6 @@ bool Shader::Load(const std::string&, const std::string&) {
 void Shader::Bind() const {}
 void Shader::Unbind() const {}
 
+// Removed SetMatrix and SetVector for now
+
 } // namespace TONGUE

@@ -16,5 +16,6 @@ namespace TONGUE
         bool Load(const std::string& vert, const std::string& frag);
         void Bind() const;
         void Unbind() const;
+        // Removed SetMatrix and SetVector for now
     };
 }
